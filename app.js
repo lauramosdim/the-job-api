@@ -6,11 +6,12 @@ const express = require('express')
 const http = require('http')
 
 const config = require('./config/environment')
+const connectDB = require('./database')
 const expressConfig = require('./config/express')
 const routeConfig = require('./routes')
 
 // Connect to MongoDB
-
+connectDB()
 
 // Setup server
 const app = express()

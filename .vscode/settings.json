@@ -7,5 +7,5 @@
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "prettier.enable": true
+  "editor.formatOnSave": true,
 }

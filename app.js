@@ -8,9 +8,9 @@ const http = require('http')
 const config = require('./config/environment')
 const expressConfig = require('./config/express')
 const routeConfig = require('./routes')
-
+const connectDB = require('./database')
 // Connect to MongoDB
-
+connectDB()
 
 // Setup server
 const app = express()

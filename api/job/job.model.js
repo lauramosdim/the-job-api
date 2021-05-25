@@ -3,8 +3,13 @@
  */
 const mongoose = require('mongoose')
 const Float = require('mongoose-float').loadType(mongoose)
+const TimeAgo = require('javascript-time-ago')
+const en = require('javascript-time-ago/locale/en')
 
 const Schema = mongoose.Schema
+
+const jobTypes = ['part time', 'full time', 'freelance', 'internship', 'remote']
+TimeAgo.addDefaultLocale(en)
 
 const JobSchema = new Schema(
   {
@@ -19,7 +24,7 @@ const JobSchema = new Schema(
     about: { type: String, trim: true, required: true },
     summary: { type: String, trim: true, required: true },
     type: {
-      enum: ['part time', 'full time', 'freelance'],
+      enum: jobTypes,
       lowercase: true,
       required: true,
       trim: true,
@@ -38,5 +43,16 @@ const JobSchema = new Schema(
     timestamps: true,
   }
 )
+
+/**
+ * Virtuals
+ */
+
+// Time Ago
+JobSchema.virtual('timeAgo').get(function () {
+  const timeAgo = new TimeAgo('en-US')
+
+  return timeAgo.format(new Date(this.createdAt))
+})
 
 module.exports = mongoose.model('Job', JobSchema)

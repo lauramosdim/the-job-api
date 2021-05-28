@@ -25,6 +25,13 @@ const all = {
 
   // Should we populate the DB with sample data?
   seedDB: false,
+
+  // Secret for session, you will want to change this and make it an environment variable
+  secrets: {
+    session: process.env.BCRYPT_SALT || 'n0d3j5-th3-j0bs-s3cr3t',
+  },
+
+  userRoles: ['manager', 'admin', 'candidate'],
 }
 
 // Export the config object based on the NODE_ENV

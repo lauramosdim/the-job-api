@@ -12,31 +12,58 @@ Hello and welcome! This Node.JS challenge project demonstrates a simple architec
 | /api/users          | GET       |                    | Get list of users                    |
 | /api/users          | POST      |                    | Creates a new user                   |
 | /api/users/:id      | GET       | `validateParamId`  | Get a single user                    |
-| /api/users/:id      | DELETE    | `validateParamId`  | Deletes a user                       |
+| /api/users/:id      | DELETE    | `hasRole('manager')` | Deletes a user                       |
 | /api/job           | GET       |                    | Get list of job                     |
 | /api/job           | POST      |                    | Creates a new job                   |
 | /api/job/:id       | GET       | `validateParamId`  | Get a single job                    |
 | /api/job/:id       | DELETE    | `validateParamId`  | Deletes a job                       |
+| /auth/local/login  | GET       |                    | Login a user                         |
+
 
 ## Usage
+The use of endpoints is very simple, previously you could see a table of endpoints that you can call, if you need to create a user or log in, here we have some examples.
 
 ### Basic example **Create USER** `/api/users`:
 
 Request Body:
 ```json
 {
-  "name": "CRISTIAN MORENO",
+  "role": "manager",
+  "email": "admin@mz.com",
+  "name": "super admin",
+  "password": "12345"
 }
 ```
 
 Response:
 ```json
 {
-    "_id": "6015c2d819ecc5bfdf14bc00",
-    "name": "cristian moreno",
-    "createdAt": "2021-01-30T20:34:32.961Z",
-    "updatedAt": "2021-01-30T20:34:32.961Z",
-    "__v": 0
+  "profile": {
+    "name": "SUPER ADMIN",
+    "role": "manager"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFjN2IyNTBjMzRhMmYyMTBmYjRkMTIiLCJpYXQiOjE2MjE5MTY0NTMsImV4cCI6MTYyMjAwMjg1M30.FEme2y4wnvKMzIB_ifIo3FVPU7YkxlNLtsTX8rqSSw4"
+}
+```
+
+### Basic example **login USER** `/auth/local/login`:
+
+Request Body:
+```json
+{
+  "email": "kz@mz.com",
+  "password": "12345"
+}
+```
+
+Response:
+```json
+{
+  "profile": {
+    "name": "KHRIZTIAN",
+    "role": "candidate"
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFjNjM1MTljZjlkNTQ5YjA3YWU2NTEiLCJpYXQiOjE2MjE5MTMyNjIsImV4cCI6MTYyMTk5OTY2Mn0.WkptwtzkfxNu5sQ28idbt4bJ7RDbXvVNlZXF0Z0ht-0"
 }
 ```
 
